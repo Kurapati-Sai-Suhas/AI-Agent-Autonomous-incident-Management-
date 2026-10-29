@@ -1,0 +1,701 @@
+{
+  "incident": {
+    "id": "DEMO-1",
+    "source": "alert",
+    "text": "Checkout API errors: database connections unavailable",
+    "logs": [
+      "2026-01-01 12:00:19 ERROR db.pool: connection pool exhausted (active=50/50, waiting=33)",
+      "2026-01-01 12:00:31 DEBUG cache: hit ratio 0.99",
+      "2026-01-01 12:00:49 DEBUG metrics: exported 42 series to prometheus",
+      "2026-01-01 12:01:04 INFO auth: token refreshed for client web-frontend",
+      "2026-01-01 12:01:08 WARN db.pool: max_connections reached for user checkout_svc on db-primary-6",
+      "2026-01-01 12:01:28 INFO auth: token refreshed for client web-frontend",
+      "2026-01-01 12:01:48 DEBUG metrics: exported 42 series to prometheus",
+      "2026-01-01 12:02:03 ERROR checkout.api: request timed out after 26964ms"
+    ],
+    "timestamp": "2026-10-30T00:29:58",
+    "category": null,
+    "priority": null,
+    "status": "open"
+  },
+  "trace": [
+    {
+      "agent": "ingestion",
+      "action": "normalize incident",
+      "evidence": [
+        "DEMO-1"
+      ],
+      "confidence": null,
+      "outcome": "ok",
+      "detail": {
+        "source": "alert",
+        "n_log_lines": 8
+      },
+      "ts": "2026-10-30T00:29:58"
+    },
+    {
+      "agent": "triage",
+      "action": "predict fault=db_pool_exhausted queue=Technical Support priority=high",
+      "evidence": [
+        "db",
+        "pool",
+        "db pool",
+        "50",
+        "api request"
+      ],
+      "confidence": 0.9577972352987589,
+      "outcome": "ok",
+      "detail": {
+        "margin": 0.9445224924438153,
+        "runner_up": "network_partition",
+        "reason": null
+      },
+      "ts": "2026-10-30T00:29:58"
+    },
+    {
+      "agent": "diagnosis",
+      "action": "rank hypotheses; top=db_pool_exhausted",
+      "evidence": [
+        "DEMO-1:log:0",
+        "DEMO-1:log:4",
+        "INC:SIM-00096",
+        "INC:SIM-00198",
+        "INC:SIM-00094",
+        "LOG:sim:SIM-00162",
+        "LOG:sim:SIM-00148"
+      ],
+      "confidence": 0.9831,
+      "outcome": "ok",
+      "detail": {
+        "hypotheses": [
+          [
+            "db_pool_exhausted",
+            0.9831
+          ],
+          [
+            "network_partition",
+            0.0053
+          ],
+          [
+            "disk_full",
+            0.0032
+          ],
+          [
+            "service_crash",
+            0.0029
+          ]
+        ],
+        "reason": null
+      },
+      "ts": "2026-10-30T00:29:58"
+    },
+    {
+      "agent": "resolution",
+      "action": "select runbook -> reset_db_pool",
+      "evidence": [
+        "RB:reset_db_pool"
+      ],
+      "confidence": null,
+      "outcome": "ok",
+      "detail": {
+        "runbook": "reset_db_pool",
+        "risk": "low",
+        "rejected": [
+          {
+            "runbook": "enable_rate_limiting",
+            "reason": "higher or equal risk (medium) than reset_db_pool (low)"
+          },
+          {
+            "runbook": "increase_db_pool_size",
+            "reason": "higher or equal risk (medium) than reset_db_pool (low)"
+          },
+          {
+            "runbook": "kill_long_running_queries",
+            "reason": "higher or equal risk (medium) than reset_db_pool (low)"
+          },
+          {
+            "runbook": "failover_db_to_replica",
+            "reason": "higher or equal risk (high) than reset_db_pool (low)"
+          }
+        ],
+        "reason": null
+      },
+      "ts": "2026-10-30T00:29:58"
+    },
+    {
+      "agent": "guardrail",
+      "action": "decision=execute",
+      "evidence": [
+        "margin",
+        "top_sim",
+        "gap",
+        "top_score",
+        "direct_evidence"
+      ],
+      "confidence": 0.9951,
+      "outcome": "ok",
+      "detail": {
+        "reasons": [],
+        "reason": null
+      },
+      "ts": "2026-10-30T00:29:58"
+    },
+    {
+      "agent": "executor",
+      "action": "dry-run then run reset_db_pool on simulator",
+      "evidence": [
+        "RB:reset_db_pool"
+      ],
+      "confidence": null,
+      "outcome": "ok",
+      "detail": {
+        "runbook": "reset_db_pool",
+        "status": "executed",
+        "dry_run": {
+          "ok": true,
+          "reason": "no precondition",
+          "would_run": "reset_db_pool on simulator 'checkout-api'",
+          "risk": "low",
+          "rollback_available": true
+        },
+        "reason": null
+      },
+      "ts": "2026-10-30T00:29:58"
+    },
+    {
+      "agent": "validation",
+      "action": "re-check health and logs",
+      "evidence": [
+        "health:checkout-api:probe1"
+      ],
+      "confidence": null,
+      "outcome": "ok",
+      "detail": {
+        "fixed": true,
+        "still_wrong": [],
+        "reason": null
+      },
+      "ts": "2026-10-30T00:29:58"
+    },
+    {
+      "agent": "close",
+      "action": "incident closed (verified fixed)",
+      "evidence": [],
+      "confidence": null,
+      "outcome": "ok",
+      "detail": {
+        "mttr_s": 78.0
+      },
+      "ts": "2026-10-30T00:29:58"
+    }
+  ],
+  "elapsed_s": 78.0,
+  "triage": {
+    "queue": {
+      "label": "Technical Support",
+      "confidence": 0.8857084392669371,
+      "runner_up": "IT Support",
+      "margin": 0.7967824023055208,
+      "evidence_words": [
+        "api",
+        "database",
+        "database connections",
+        "api errors"
+      ],
+      "probs": {
+        "IT Support": 0.08892603696141634,
+        "Service Outages and Maintenance": 0.025365523771646706,
+        "Technical Support": 0.8857084392669371
+      }
+    },
+    "priority": {
+      "label": "high",
+      "confidence": 0.4893032693868447,
+      "runner_up": "medium",
+      "margin": 0.14965811668905382,
+      "evidence_words": [
+        "api",
+        "database connections",
+        "api errors",
+        "database",
+        "connections"
+      ],
+      "probs": {
+        "high": 0.4893032693868447,
+        "low": 0.17105157791536435,
+        "medium": 0.3396451526977909
+      }
+    },
+    "fault": {
+      "label": "db_pool_exhausted",
+      "confidence": 0.9577972352987589,
+      "runner_up": "network_partition",
+      "margin": 0.9445224924438153,
+      "evidence_words": [
+        "db",
+        "pool",
+        "db pool",
+        "50",
+        "api request"
+      ],
+      "probs": {
+        "cert_expired": 0.0069524034060875215,
+        "db_pool_exhausted": 0.9577972352987589,
+        "disk_full": 0.007936767394338042,
+        "memory_leak": 0.0067541961531033265,
+        "network_partition": 0.013274742854943702,
+        "service_crash": 0.007284654892768253
+      }
+    }
+  },
+  "diagnosis": {
+    "hypotheses": [
+      {
+        "cause": "db_pool_exhausted",
+        "score": 0.9831,
+        "components": {
+          "triage": 0.9578,
+          "retrieval": 1.0,
+          "rules": 1.0
+        },
+        "supporting_evidence": [
+          "DEMO-1:log:0",
+          "DEMO-1:log:4",
+          "INC:SIM-00096",
+          "INC:SIM-00198",
+          "INC:SIM-00094",
+          "LOG:sim:SIM-00162",
+          "LOG:sim:SIM-00148"
+        ],
+        "missing_or_contradicting": [],
+        "explanation": "db_pool_exhausted (score 0.98): triage p=0.96, neighbour vote=1.00, rule match=1.00. Evidence: [DEMO-1:log:0], [DEMO-1:log:4], [INC:SIM-00096], [INC:SIM-00198], [INC:SIM-00094], [LOG:sim:SIM-00162], [LOG:sim:SIM-00148]."
+      },
+      {
+        "cause": "network_partition",
+        "score": 0.0053,
+        "components": {
+          "triage": 0.0133,
+          "retrieval": 0.0,
+          "rules": 0.0
+        },
+        "supporting_evidence": [],
+        "missing_or_contradicting": [
+          "no log line matches a network_partition signature",
+          "no similar resolved incident had this cause"
+        ],
+        "explanation": "network_partition (score 0.01): triage p=0.01, neighbour vote=0.00, rule match=0.00. Gaps: no log line matches a network_partition signature; no similar resolved incident had this cause."
+      },
+      {
+        "cause": "disk_full",
+        "score": 0.0032,
+        "components": {
+          "triage": 0.0079,
+          "retrieval": 0.0,
+          "rules": 0.0
+        },
+        "supporting_evidence": [],
+        "missing_or_contradicting": [
+          "no log line matches a disk_full signature",
+          "no similar resolved incident had this cause"
+        ],
+        "explanation": "disk_full (score 0.00): triage p=0.01, neighbour vote=0.00, rule match=0.00. Gaps: no log line matches a disk_full signature; no similar resolved incident had this cause."
+      },
+      {
+        "cause": "service_crash",
+        "score": 0.0029,
+        "components": {
+          "triage": 0.0073,
+          "retrieval": 0.0,
+          "rules": 0.0
+        },
+        "supporting_evidence": [],
+        "missing_or_contradicting": [
+          "no log line matches a service_crash signature",
+          "no similar resolved incident had this cause"
+        ],
+        "explanation": "service_crash (score 0.00): triage p=0.01, neighbour vote=0.00, rule match=0.00. Gaps: no log line matches a service_crash signature; no similar resolved incident had this cause."
+      }
+    ],
+    "top_cause": "db_pool_exhausted",
+    "top_score": 0.9831,
+    "score_gap": 0.9778,
+    "top_retrieval_similarity": 0.9545,
+    "top_direct_evidence": 2,
+    "retrieved": {
+      "incidents": [
+        {
+          "id": "INC:SIM-00096",
+          "score": 0.032266,
+          "similarity": 0.954,
+          "bm25": 261.176,
+          "bm25_rank": 1,
+          "vector_rank": 3,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "db_pool_exhausted",
+            "root_cause": "db_pool_exhausted",
+            "fix": "reset_db_pool",
+            "supported": true,
+            "split": "train"
+          },
+          "snippet": "Customer reports: checkout not working properly DEBUG metrics: exported 42 series to prometheus INFO auth: token refreshed for client web-frontend INFO checkout.api: GET /health 200 3ms DEBUG metrics: exported 42 series to prometheus WARN d"
+        },
+        {
+          "id": "INC:SIM-00198",
+          "score": 0.031754,
+          "similarity": 0.9511,
+          "bm25": 257.462,
+          "bm25_rank": 2,
+          "vector_rank": 4,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "db_pool_exhausted",
+            "root_cause": "db_pool_exhausted",
+            "fix": "reset_db_pool",
+            "supported": true,
+            "split": "train"
+          },
+          "snippet": "High error rate on /orders, DB connection timeouts DEBUG metrics: exported 42 series to prometheus WARN checkout.api: upstream call slow (latency_ms=26004) INFO checkout.api: POST /orders 201 19819ms WARN db.pool: max_connections reached fo"
+        },
+        {
+          "id": "INC:SIM-00094",
+          "score": 0.031754,
+          "similarity": 0.9545,
+          "bm25": 255.473,
+          "bm25_rank": 4,
+          "vector_rank": 2,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "db_pool_exhausted",
+            "root_cause": "db_pool_exhausted",
+            "fix": "reset_db_pool",
+            "supported": true,
+            "split": "train"
+          },
+          "snippet": "High error rate on /orders, DB connection timeouts ERROR db.pool: connection pool exhausted (active=50/50, waiting=37) DEBUG metrics: exported 42 series to prometheus DEBUG cache: hit ratio 0.92 INFO deploy: config reload complete (version "
+        },
+        {
+          "id": "INC:SIM-00058",
+          "score": 0.029857,
+          "similarity": 0.9291,
+          "bm25": 254.027,
+          "bm25_rank": 6,
+          "vector_rank": 8,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "db_pool_exhausted",
+            "root_cause": "db_pool_exhausted",
+            "fix": "reset_db_pool",
+            "supported": true,
+            "split": "train"
+          },
+          "snippet": "Checkout API errors: database connections unavailable DEBUG cache: hit ratio 0.98 ERROR db.pool: connection pool exhausted (active=50/50, waiting=21) INFO auth: token refreshed for client web-frontend DEBUG metrics: exported 42 series to pr"
+        },
+        {
+          "id": "INC:SIM-00061",
+          "score": 0.029857,
+          "similarity": 0.9298,
+          "bm25": 251.799,
+          "bm25_rank": 8,
+          "vector_rank": 6,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "db_pool_exhausted",
+            "root_cause": "db_pool_exhausted",
+            "fix": "reset_db_pool",
+            "supported": true,
+            "split": "train"
+          },
+          "snippet": "High error rate on /orders, DB connection timeouts INFO auth: token refreshed for client web-frontend INFO checkout.api: GET /health 200 4ms INFO auth: token refreshed for client web-frontend DEBUG metrics: exported 42 series to prometheus "
+        },
+        {
+          "id": "INC:SIM-00183",
+          "score": 0.029469,
+          "similarity": 0.9124,
+          "bm25": 255.464,
+          "bm25_rank": 5,
+          "vector_rank": 11,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "db_pool_exhausted",
+            "root_cause": "db_pool_exhausted",
+            "fix": "reset_db_pool",
+            "supported": true,
+            "split": "train"
+          },
+          "snippet": "Checkout API errors: database connections unavailable ERROR checkout.repo: HikariPool-1 - Connection is not available, request timed out after 30000ms DEBUG metrics: exported 42 series to prometheus INFO auth: token refreshed for client web"
+        },
+        {
+          "id": "INC:SIM-00161",
+          "score": 0.028372,
+          "similarity": 0.951,
+          "bm25": 239.988,
+          "bm25_rank": 17,
+          "vector_rank": 5,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "db_pool_exhausted",
+            "root_cause": "db_pool_exhausted",
+            "fix": "reset_db_pool",
+            "supported": true,
+            "split": "train"
+          },
+          "snippet": "Checkout API errors: database connections unavailable ERROR checkout.repo: HikariPool-1 - Connection is not available, request timed out after 30000ms ERROR db.pool: connection pool exhausted (active=50/50, waiting=26) DEBUG cache: hit rati"
+        },
+        {
+          "id": "INC:SIM-00181",
+          "score": 0.027984,
+          "similarity": 0.9024,
+          "bm25": 245.308,
+          "bm25_rank": 10,
+          "vector_rank": 13,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "db_pool_exhausted",
+            "root_cause": "db_pool_exhausted",
+            "fix": "reset_db_pool",
+            "supported": true,
+            "split": "train"
+          },
+          "snippet": "High error rate on /orders, DB connection timeouts WARN db.pool: max_connections reached for user checkout_svc on db-primary-9 INFO auth: token refreshed for client web-frontend DEBUG metrics: exported 42 series to prometheus ERROR db.pool:"
+        }
+      ],
+      "logs": [
+        {
+          "id": "LOG:sim:SIM-00162",
+          "score": 0.031258,
+          "similarity": 0.7515,
+          "bm25": 137.222,
+          "bm25_rank": 3,
+          "vector_rank": 5,
+          "meta": {
+            "kind": "sim_logs",
+            "service": "checkout-api",
+            "fault": "db_pool_exhausted",
+            "split": "train"
+          },
+          "snippet": "INFO checkout.api: POST /orders 201 14968ms ERROR checkout.repo: HikariPool-1 - Connection is not available, request timed out after 30000ms DEBUG cache: hit ratio 0.93 ERROR db.pool: connection pool exhausted (active=50/50, waiting=12) INF"
+        },
+        {
+          "id": "LOG:sim:SIM-00148",
+          "score": 0.030798,
+          "similarity": 0.7585,
+          "bm25": 131.338,
+          "bm25_rank": 7,
+          "vector_rank": 3,
+          "meta": {
+            "kind": "sim_logs",
+            "service": "checkout-api",
+            "fault": "db_pool_exhausted",
+            "split": "train"
+          },
+          "snippet": "ERROR db.pool: connection pool exhausted (active=50/50, waiting=36) INFO checkout.api: POST /orders 201 5782ms DEBUG metrics: exported 42 series to prometheus DEBUG cache: hit ratio 0.91 ERROR checkout.api: request timed out after 5421ms DE"
+        },
+        {
+          "id": "LOG:sim:SIM-00114",
+          "score": 0.030478,
+          "similarity": 0.7423,
+          "bm25": 138.868,
+          "bm25_rank": 1,
+          "vector_rank": 11,
+          "meta": {
+            "kind": "sim_logs",
+            "service": "checkout-api",
+            "fault": "db_pool_exhausted",
+            "split": "train"
+          },
+          "snippet": "ERROR checkout.repo: HikariPool-1 - Connection is not available, request timed out after 30000ms DEBUG metrics: exported 42 series to prometheus ERROR db.pool: connection pool exhausted (active=50/50, waiting=38) INFO checkout.api: POST /or"
+        },
+        {
+          "id": "LOG:sim:SIM-00108",
+          "score": 0.030214,
+          "similarity": 0.7599,
+          "bm25": 130.629,
+          "bm25_rank": 11,
+          "vector_rank": 2,
+          "meta": {
+            "kind": "sim_logs",
+            "service": "checkout-api",
+            "fault": "db_pool_exhausted",
+            "split": "train"
+          },
+          "snippet": "ERROR db.pool: connection pool exhausted (active=50/50, waiting=39) DEBUG metrics: exported 42 series to prometheus ERROR checkout.api: request timed out after 22048ms WARN db.pool: max_connections reached for user checkout_svc on db-primar"
+        }
+      ],
+      "runbooks": [
+        {
+          "id": "RB:increase_db_pool_size",
+          "score": 0.032018,
+          "similarity": 0.8337,
+          "bm25": 5.681,
+          "bm25_rank": 4,
+          "vector_rank": 1,
+          "meta": {
+            "kind": "runbook",
+            "id": "RB:increase_db_pool_size",
+            "name": "increase_db_pool_size",
+            "description": "Double the DB pool size (max 200).",
+            "handles": [
+              "db_pool_exhausted"
+            ],
+            "risk": "medium",
+            "expected_effect": "db pool usage below 90%",
+            "expected_checks": [
+              "db_pool_ok",
+              "error_rate_ok"
+            ]
+          },
+          "snippet": "increase db pool size. Double the DB pool size (max 200). Handles: db pool exhausted. Effect: db pool usage below 90%"
+        },
+        {
+          "id": "RB:kill_long_running_queries",
+          "score": 0.031754,
+          "similarity": 0.4484,
+          "bm25": 6.596,
+          "bm25_rank": 2,
+          "vector_rank": 4,
+          "meta": {
+            "kind": "runbook",
+            "id": "RB:kill_long_running_queries",
+            "name": "kill_long_running_queries",
+            "description": "Terminate queries running longer than 5 minutes.",
+            "handles": [
+              "db_pool_exhausted"
+            ],
+            "risk": "medium",
+            "expected_effect": "connections released",
+            "expected_checks": [
+              "db_pool_ok",
+              "error_rate_ok"
+            ]
+          },
+          "snippet": "kill long running queries. Terminate queries running longer than 5 minutes. Handles: db pool exhausted. Effect: connections released"
+        },
+        {
+          "id": "RB:restart_service",
+          "score": 0.031545,
+          "similarity": 0.3171,
+          "bm25": 6.831,
+          "bm25_rank": 1,
+          "vector_rank": 6,
+          "meta": {
+            "kind": "runbook",
+            "id": "RB:restart_service",
+            "name": "restart_service",
+            "description": "Graceful restart of the checkout-api process.",
+            "handles": [
+              "memory_leak",
+              "service_crash"
+            ],
+            "risk": "low",
+            "expected_effect": "process up, heap back to baseline",
+            "expected_checks": [
+              "process_up",
+              "heap_ok",
+              "error_rate_ok"
+            ]
+          },
+          "snippet": "restart service. Graceful restart of the checkout-api process. Handles: memory leak, service crash. Effect: process up, heap back to baseline"
+        }
+      ]
+    },
+    "rule_hits": {
+      "db_pool_exhausted": [
+        "DEMO-1:log:0",
+        "DEMO-1:log:4"
+      ]
+    },
+    "llm_used": false
+  },
+  "resolution": {
+    "runbook": "reset_db_pool",
+    "status": "matched",
+    "risk": "low",
+    "matched_because": "'db_pool_exhausted' is listed in reset_db_pool.handles; lowest-risk candidate whose preconditions hold",
+    "expected_effect": "db pool usage below 90%",
+    "rejected": [
+      {
+        "runbook": "enable_rate_limiting",
+        "reason": "higher or equal risk (medium) than reset_db_pool (low)"
+      },
+      {
+        "runbook": "increase_db_pool_size",
+        "reason": "higher or equal risk (medium) than reset_db_pool (low)"
+      },
+      {
+        "runbook": "kill_long_running_queries",
+        "reason": "higher or equal risk (medium) than reset_db_pool (low)"
+      },
+      {
+        "runbook": "failover_db_to_replica",
+        "reason": "higher or equal risk (high) than reset_db_pool (low)"
+      }
+    ],
+    "evidence": [
+      "RB:reset_db_pool"
+    ]
+  },
+  "guardrail": {
+    "decision": "execute",
+    "reasons": [],
+    "confidence": 0.9951,
+    "signals": {
+      "margin": 0.9445,
+      "top_sim": 0.9545,
+      "gap": 0.9778,
+      "top_score": 0.9831,
+      "direct_evidence": 2.0
+    },
+    "thresholds": {
+      "margin": 0.3,
+      "top_sim": 0.5,
+      "gap": 0.2,
+      "confidence": 0.9
+    },
+    "calibrated": true
+  },
+  "execution": {
+    "status": "executed",
+    "dry_run": {
+      "ok": true,
+      "reason": "no precondition",
+      "would_run": "reset_db_pool on simulator 'checkout-api'",
+      "risk": "low",
+      "rollback_available": true
+    },
+    "snapshot": {
+      "db_pool_size": 50,
+      "replicas": 2,
+      "log_retention_days": 14,
+      "cache_enabled": true,
+      "rate_limit_rps": null,
+      "deployed_version": "v1.4.2",
+      "db_primary": "db-primary-1"
+    },
+    "action_returned": true,
+    "seconds": 35
+  },
+  "validation": {
+    "fixed": true,
+    "checked": [
+      "health_check (all checks)",
+      "expected: ['db_pool_ok', 'error_rate_ok']",
+      "fresh log window for ERROR/CRIT lines"
+    ],
+    "still_wrong": [],
+    "probes": [
+      {
+        "attempt": 1,
+        "healthy": true,
+        "failing_checks": [],
+        "error_lines": []
+      }
+    ],
+    "seconds": 30,
+    "evidence": [
+      "health:checkout-api:probe1"
+    ]
+  },
+  "escalation_reasons": [],
+  "status": "resolved"
+}

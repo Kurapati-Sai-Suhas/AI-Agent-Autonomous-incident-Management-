@@ -1,0 +1,676 @@
+{
+  "split": "test",
+  "kb_manifest": {
+    "built_at": "2026-10-30T00:14:53",
+    "frozen": true,
+    "splits_used": [
+      "train"
+    ],
+    "n_docs": {
+      "incidents": 12276,
+      "logs": 2237,
+      "runbooks": 12
+    },
+    "n_learned": 0,
+    "embedder": "lsa-tfidf-svd",
+    "ids_sha256": {
+      "incidents": "bf62326d6c7fc492",
+      "logs": "7a6cef477e3d83ec",
+      "runbooks": "ddf1b7f14c6f1406"
+    }
+  },
+  "triage": {
+    "queue": {
+      "n": 1102,
+      "accuracy": 0.814,
+      "macro_f1": 0.7904,
+      "majority_baseline_acc": 0.6443
+    },
+    "priority": {
+      "n": 2451,
+      "accuracy": 0.6512,
+      "macro_f1": 0.6369,
+      "majority_baseline_acc": 0.4194
+    },
+    "fault_all": {
+      "n": 180,
+      "accuracy": 0.9222,
+      "macro_f1": 0.922,
+      "majority_baseline_acc": 0.1722
+    },
+    "fault_clear": {
+      "n": 152,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "majority_baseline_acc": 0.1711
+    },
+    "fault_ambiguous": {
+      "n": 28,
+      "accuracy": 0.5,
+      "macro_f1": 0.4411,
+      "majority_baseline_acc": 0.1786
+    }
+  },
+  "pipeline": {
+    "full_system": {
+      "n": 180,
+      "diagnosis_accuracy": 0.9222,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.5,
+      "auto_resolution_rate_all": 0.5667,
+      "auto_resolution_rate_supported": 0.843,
+      "verified_resolution_rate_all": 0.5667,
+      "false_success_claims": 0,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 102,
+      "escalation_rate": 0.4333,
+      "escalation_vs_should_escalate": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 78,
+        "fp": 0,
+        "fn": 0
+      },
+      "unsupported_escalated": "59/59",
+      "ambiguous_escalated": "28/28",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "no_matching_runbook": 58,
+        "insufficient_evidence": 28,
+        "low_confidence": 26,
+        "conflicting_evidence": 20,
+        "triage_ambiguous": 18
+      },
+      "stuck_agent_counts": {
+        "resolution": 50,
+        "triage": 18,
+        "diagnosis": 10
+      }
+    },
+    "no_rag": {
+      "n": 180,
+      "diagnosis_accuracy": 0.9222,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.5,
+      "auto_resolution_rate_all": 0.0,
+      "auto_resolution_rate_supported": 0.0,
+      "verified_resolution_rate_all": 0.0,
+      "false_success_claims": 0,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 0,
+      "escalation_rate": 1.0,
+      "escalation_vs_should_escalate": {
+        "precision": 0.4333,
+        "recall": 1.0,
+        "f1": 0.6047,
+        "tp": 78,
+        "fp": 102,
+        "fn": 0
+      },
+      "unsupported_escalated": "59/59",
+      "ambiguous_escalated": "28/28",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "low_retrieval_support": 180,
+        "no_matching_runbook": 58,
+        "insufficient_evidence": 28,
+        "low_confidence": 28,
+        "conflicting_evidence": 20,
+        "triage_ambiguous": 18
+      },
+      "stuck_agent_counts": {
+        "guardrail": 102,
+        "resolution": 50,
+        "triage": 18,
+        "diagnosis": 10
+      }
+    },
+    "no_rag_no_retrieval_gate": {
+      "n": 180,
+      "diagnosis_accuracy": 0.9222,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.5,
+      "auto_resolution_rate_all": 0.5667,
+      "auto_resolution_rate_supported": 0.843,
+      "verified_resolution_rate_all": 0.5667,
+      "false_success_claims": 0,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 102,
+      "escalation_rate": 0.4333,
+      "escalation_vs_should_escalate": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 78,
+        "fp": 0,
+        "fn": 0
+      },
+      "unsupported_escalated": "59/59",
+      "ambiguous_escalated": "28/28",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "no_matching_runbook": 58,
+        "low_confidence": 39,
+        "insufficient_evidence": 28,
+        "conflicting_evidence": 20,
+        "triage_ambiguous": 18
+      },
+      "stuck_agent_counts": {
+        "resolution": 50,
+        "triage": 18,
+        "diagnosis": 10
+      }
+    },
+    "no_validation": {
+      "n": 180,
+      "diagnosis_accuracy": 0.9222,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.5,
+      "auto_resolution_rate_all": 0.5667,
+      "auto_resolution_rate_supported": 0.843,
+      "verified_resolution_rate_all": 0.5667,
+      "false_success_claims": 0,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 102,
+      "escalation_rate": 0.4333,
+      "escalation_vs_should_escalate": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 78,
+        "fp": 0,
+        "fn": 0
+      },
+      "unsupported_escalated": "59/59",
+      "ambiguous_escalated": "28/28",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "no_matching_runbook": 58,
+        "insufficient_evidence": 28,
+        "low_confidence": 26,
+        "conflicting_evidence": 20,
+        "triage_ambiguous": 18
+      },
+      "stuck_agent_counts": {
+        "resolution": 50,
+        "triage": 18,
+        "diagnosis": 10
+      }
+    },
+    "no_calibration": {
+      "n": 180,
+      "diagnosis_accuracy": 0.9222,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.5,
+      "auto_resolution_rate_all": 0.5667,
+      "auto_resolution_rate_supported": 0.843,
+      "verified_resolution_rate_all": 0.5667,
+      "false_success_claims": 0,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 102,
+      "escalation_rate": 0.4333,
+      "escalation_vs_should_escalate": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 78,
+        "fp": 0,
+        "fn": 0
+      },
+      "unsupported_escalated": "59/59",
+      "ambiguous_escalated": "28/28",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "no_matching_runbook": 58,
+        "insufficient_evidence": 28,
+        "low_confidence": 28,
+        "triage_ambiguous": 13,
+        "conflicting_evidence": 6
+      },
+      "stuck_agent_counts": {
+        "resolution": 50,
+        "diagnosis": 15,
+        "triage": 13
+      }
+    }
+  },
+  "stress_persistent_faults": {
+    "full_system": {
+      "n": 121,
+      "diagnosis_accuracy": 0.9174,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.4737,
+      "auto_resolution_rate_all": 0.0,
+      "auto_resolution_rate_supported": 0.0,
+      "verified_resolution_rate_all": 0.0,
+      "false_success_claims": 0,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 102,
+      "escalation_rate": 1.0,
+      "escalation_vs_should_escalate": {
+        "precision": 0.157,
+        "recall": 1.0,
+        "f1": 0.2714,
+        "tp": 19,
+        "fp": 102,
+        "fn": 0
+      },
+      "unsupported_escalated": "0/0",
+      "ambiguous_escalated": "19/19",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "fix_not_verified": 102,
+        "insufficient_evidence": 19,
+        "low_confidence": 19,
+        "conflicting_evidence": 17,
+        "triage_ambiguous": 16,
+        "no_matching_runbook": 1
+      },
+      "stuck_agent_counts": {
+        "validation": 102,
+        "triage": 16,
+        "diagnosis": 3
+      }
+    },
+    "no_rag": {
+      "n": 121,
+      "diagnosis_accuracy": 0.9174,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.4737,
+      "auto_resolution_rate_all": 0.0,
+      "auto_resolution_rate_supported": 0.0,
+      "verified_resolution_rate_all": 0.0,
+      "false_success_claims": 0,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 0,
+      "escalation_rate": 1.0,
+      "escalation_vs_should_escalate": {
+        "precision": 0.157,
+        "recall": 1.0,
+        "f1": 0.2714,
+        "tp": 19,
+        "fp": 102,
+        "fn": 0
+      },
+      "unsupported_escalated": "0/0",
+      "ambiguous_escalated": "19/19",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "low_retrieval_support": 121,
+        "insufficient_evidence": 19,
+        "low_confidence": 19,
+        "conflicting_evidence": 17,
+        "triage_ambiguous": 16,
+        "no_matching_runbook": 1
+      },
+      "stuck_agent_counts": {
+        "guardrail": 102,
+        "triage": 16,
+        "diagnosis": 3
+      }
+    },
+    "no_rag_no_retrieval_gate": {
+      "n": 121,
+      "diagnosis_accuracy": 0.9174,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.4737,
+      "auto_resolution_rate_all": 0.0,
+      "auto_resolution_rate_supported": 0.0,
+      "verified_resolution_rate_all": 0.0,
+      "false_success_claims": 0,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 102,
+      "escalation_rate": 1.0,
+      "escalation_vs_should_escalate": {
+        "precision": 0.157,
+        "recall": 1.0,
+        "f1": 0.2714,
+        "tp": 19,
+        "fp": 102,
+        "fn": 0
+      },
+      "unsupported_escalated": "0/0",
+      "ambiguous_escalated": "19/19",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "fix_not_verified": 102,
+        "insufficient_evidence": 19,
+        "low_confidence": 19,
+        "conflicting_evidence": 17,
+        "triage_ambiguous": 16,
+        "no_matching_runbook": 1
+      },
+      "stuck_agent_counts": {
+        "validation": 102,
+        "triage": 16,
+        "diagnosis": 3
+      }
+    },
+    "no_validation": {
+      "n": 121,
+      "diagnosis_accuracy": 0.9174,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.4737,
+      "auto_resolution_rate_all": 0.843,
+      "auto_resolution_rate_supported": 0.843,
+      "verified_resolution_rate_all": 0.0,
+      "false_success_claims": 102,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 102,
+      "escalation_rate": 0.157,
+      "escalation_vs_should_escalate": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 19,
+        "fp": 0,
+        "fn": 0
+      },
+      "unsupported_escalated": "0/0",
+      "ambiguous_escalated": "19/19",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "insufficient_evidence": 19,
+        "low_confidence": 19,
+        "conflicting_evidence": 17,
+        "triage_ambiguous": 16,
+        "no_matching_runbook": 1
+      },
+      "stuck_agent_counts": {
+        "triage": 16,
+        "diagnosis": 3
+      }
+    },
+    "no_calibration": {
+      "n": 121,
+      "diagnosis_accuracy": 0.9174,
+      "diagnosis_accuracy_clear": 1.0,
+      "diagnosis_accuracy_ambiguous": 0.4737,
+      "auto_resolution_rate_all": 0.0,
+      "auto_resolution_rate_supported": 0.0,
+      "verified_resolution_rate_all": 0.0,
+      "false_success_claims": 0,
+      "false_action_rate": 0.0,
+      "wrong_actions": 0,
+      "actions_executed": 102,
+      "escalation_rate": 1.0,
+      "escalation_vs_should_escalate": {
+        "precision": 0.157,
+        "recall": 1.0,
+        "f1": 0.2714,
+        "tp": 19,
+        "fp": 102,
+        "fn": 0
+      },
+      "unsupported_escalated": "0/0",
+      "ambiguous_escalated": "19/19",
+      "citation_faithfulness": 1.0,
+      "trace_complete_rate": 1.0,
+      "escalation_reason_counts": {
+        "fix_not_verified": 102,
+        "insufficient_evidence": 19,
+        "low_confidence": 19,
+        "triage_ambiguous": 11,
+        "conflicting_evidence": 5,
+        "no_matching_runbook": 1
+      },
+      "stuck_agent_counts": {
+        "validation": 102,
+        "triage": 11,
+        "diagnosis": 8
+      }
+    }
+  },
+  "calibration_test": {
+    "ece": 0.0235,
+    "reliability": [
+      {
+        "bin": "0.4-0.5",
+        "n": 1,
+        "mean_conf": 0.4709,
+        "accuracy": 0.0
+      },
+      {
+        "bin": "0.5-0.6",
+        "n": 6,
+        "mean_conf": 0.5323166666666667,
+        "accuracy": 0.5
+      },
+      {
+        "bin": "0.6-0.7",
+        "n": 10,
+        "mean_conf": 0.64125,
+        "accuracy": 0.6
+      },
+      {
+        "bin": "0.7-0.8",
+        "n": 5,
+        "mean_conf": 0.7512,
+        "accuracy": 0.4
+      },
+      {
+        "bin": "0.8-0.9",
+        "n": 4,
+        "mean_conf": 0.845075,
+        "accuracy": 0.5
+      },
+      {
+        "bin": "0.9-1.0",
+        "n": 154,
+        "mean_conf": 0.9936318181818181,
+        "accuracy": 0.9935064935064936
+      }
+    ]
+  },
+  "risk_coverage_test": [
+    {
+      "threshold": 0.0,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.05,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.1,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.15,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.2,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.25,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.3,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.35,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.4,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.45,
+      "coverage": 1.0,
+      "risk_wrong_action": 0.0902
+    },
+    {
+      "threshold": 0.5,
+      "coverage": 0.9918,
+      "risk_wrong_action": 0.0826
+    },
+    {
+      "threshold": 0.55,
+      "coverage": 0.9508,
+      "risk_wrong_action": 0.0603
+    },
+    {
+      "threshold": 0.6,
+      "coverage": 0.9426,
+      "risk_wrong_action": 0.0609
+    },
+    {
+      "threshold": 0.65,
+      "coverage": 0.8934,
+      "risk_wrong_action": 0.0459
+    },
+    {
+      "threshold": 0.7,
+      "coverage": 0.8607,
+      "risk_wrong_action": 0.0286
+    },
+    {
+      "threshold": 0.75,
+      "coverage": 0.8525,
+      "risk_wrong_action": 0.0192
+    },
+    {
+      "threshold": 0.8,
+      "coverage": 0.8443,
+      "risk_wrong_action": 0.0097
+    },
+    {
+      "threshold": 0.85,
+      "coverage": 0.8361,
+      "risk_wrong_action": 0.0
+    },
+    {
+      "threshold": 0.9,
+      "coverage": 0.8361,
+      "risk_wrong_action": 0.0
+    },
+    {
+      "threshold": 0.95,
+      "coverage": 0.8361,
+      "risk_wrong_action": 0.0
+    },
+    {
+      "threshold": 1.0,
+      "coverage": 0.0,
+      "risk_wrong_action": 0.0
+    }
+  ],
+  "retrieval_test": {
+    "bm25": {
+      "recall@1": 0.9333,
+      "recall@3": 0.9833,
+      "recall@5": 0.9889,
+      "recall@10": 1.0,
+      "mrr@10": 0.9581
+    },
+    "vector": {
+      "recall@1": 0.9,
+      "recall@3": 0.9333,
+      "recall@5": 0.9667,
+      "recall@10": 0.9889,
+      "mrr@10": 0.9261
+    },
+    "hybrid": {
+      "recall@1": 0.9111,
+      "recall@3": 0.9667,
+      "recall@5": 0.9778,
+      "recall@10": 0.9889,
+      "mrr@10": 0.9397
+    },
+    "note": "Relevant = a resolved TRAIN simulator incident with the same fault, inside the full incident index (12k docs incl. tickets as distractors). Cross-encoder rerank: not run."
+  },
+  "log_parsing_drain": {
+    "Apache": {
+      "lines": 2000,
+      "true_templates": 6,
+      "ga_no_masking": 1.0,
+      "ga_generic_masking": 1.0
+    },
+    "Hadoop": {
+      "lines": 2000,
+      "true_templates": 114,
+      "ga_no_masking": 0.9535,
+      "ga_generic_masking": 0.963
+    },
+    "HDFS": {
+      "lines": 2000,
+      "true_templates": 14,
+      "ga_no_masking": 0.9975,
+      "ga_generic_masking": 0.9975
+    },
+    "OpenStack": {
+      "lines": 2000,
+      "true_templates": 43,
+      "ga_no_masking": 0.3095,
+      "ga_generic_masking": 0.2985
+    },
+    "Proxifier": {
+      "lines": 2000,
+      "true_templates": 8,
+      "ga_no_masking": 0.0255,
+      "ga_generic_masking": 0.017
+    }
+  },
+  "mttr": {
+    "servicenow_distribution": {
+      "n_incidents_with_resolution": 23362,
+      "median_h": 22.1,
+      "mean_h": 178.1715820563308,
+      "p25_h": 0.4166666666666667,
+      "p75_h": 148.47916666666666,
+      "p90_h": 381.54833333333335,
+      "max_h": 8070.166666666667
+    },
+    "manual_baseline": {
+      "median_h": 15.8833,
+      "mean_h": 170.65,
+      "p75_h": 152.02,
+      "p90_h": 342.0
+    },
+    "agent_pipeline": {
+      "median_h": 0.0383,
+      "mean_h": 66.56,
+      "p75_h": 0.88,
+      "p90_h": 125.39
+    },
+    "auto_resolved_minutes": {
+      "n": 102,
+      "median_min": 1.92
+    },
+    "method": "SIMULATED. Manual = one human resolution time per incident sampled from the 23,362 real ServiceNow resolution times. Agent = simulated step durations; escalated incidents add the SAME sampled human time (no speed-up from the handoff is assumed). Not a production figure."
+  },
+  "runtime_s": 376.2
+}

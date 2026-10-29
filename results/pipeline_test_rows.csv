@@ -1,0 +1,181 @@
+id,fault,ambiguous,supported,status,pred_fault,diag_correct,confidence,runbook,executed,wrong_action,resolved_claimed,healthy_after,escalated,should_escalate,reasons,stuck_agent,elapsed_s,faithful,trace_complete
+SIM-00003,db_pool_exhausted,True,True,awaiting_human,db_pool_exhausted,True,0.6537,reset_db_pool,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00012,db_pool_exhausted,True,True,awaiting_human,db_pool_exhausted,True,0.5781,reset_db_pool,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00017,db_pool_exhausted,True,True,awaiting_human,network_partition,False,0.7032,,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'no_matching_runbook', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00019,db_pool_exhausted,True,True,awaiting_human,memory_leak,False,0.7252,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence']",diagnosis,18.0,True,True
+SIM-00024,db_pool_exhausted,True,True,awaiting_human,memory_leak,False,0.8189,restart_service,[],False,False,False,True,True,"['insufficient_evidence', 'low_confidence']",diagnosis,18.0,True,True
+SIM-00031,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9957,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00060,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9946,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00067,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9946,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00068,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9946,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00071,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9953,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00081,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9955,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00082,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9956,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00086,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9957,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00110,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9949,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00118,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9949,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00121,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9946,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00122,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9954,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00123,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9957,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00128,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9957,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00130,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9952,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00145,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9955,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00153,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9927,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00155,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9954,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00157,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9953,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00158,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9953,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00160,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9951,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00174,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9954,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00176,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9954,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00185,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9943,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00194,db_pool_exhausted,False,True,resolved,db_pool_exhausted,True,0.9943,reset_db_pool,['reset_db_pool'],False,True,True,False,False,[],,78.0,True,True
+SIM-00214,disk_full,True,True,awaiting_human,memory_leak,False,0.6826,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00215,disk_full,True,True,awaiting_human,disk_full,True,0.5433,clear_disk_logs,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00218,disk_full,True,True,awaiting_human,service_crash,False,0.6224,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00220,disk_full,True,True,awaiting_human,service_crash,False,0.7982,restart_service,[],False,False,False,True,True,"['insufficient_evidence', 'low_confidence']",diagnosis,18.0,True,True
+SIM-00230,disk_full,False,True,resolved,disk_full,True,0.9932,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00234,disk_full,False,True,resolved,disk_full,True,0.9953,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00237,disk_full,False,True,resolved,disk_full,True,0.9953,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00242,disk_full,False,True,resolved,disk_full,True,0.9949,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00244,disk_full,False,True,resolved,disk_full,True,0.9953,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00245,disk_full,False,True,resolved,disk_full,True,0.9943,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00248,disk_full,False,True,resolved,disk_full,True,0.9943,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00252,disk_full,False,True,resolved,disk_full,True,0.9955,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00277,disk_full,False,True,resolved,disk_full,True,0.9943,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00282,disk_full,False,True,resolved,disk_full,True,0.9955,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00283,disk_full,False,True,resolved,disk_full,True,0.9953,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00284,disk_full,False,True,resolved,disk_full,True,0.9954,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00287,disk_full,False,True,resolved,disk_full,True,0.9955,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00299,disk_full,False,True,resolved,disk_full,True,0.9951,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00318,disk_full,False,True,resolved,disk_full,True,0.9952,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00325,disk_full,False,True,resolved,disk_full,True,0.9947,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00330,disk_full,False,True,resolved,disk_full,True,0.9955,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00332,disk_full,False,True,resolved,disk_full,True,0.9948,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00333,disk_full,False,True,resolved,disk_full,True,0.9956,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00335,disk_full,False,True,resolved,disk_full,True,0.9954,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00351,disk_full,False,True,resolved,disk_full,True,0.9945,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00355,disk_full,False,True,resolved,disk_full,True,0.9956,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00356,disk_full,False,True,resolved,disk_full,True,0.9951,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00358,disk_full,False,True,resolved,disk_full,True,0.9945,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00369,disk_full,False,True,resolved,disk_full,True,0.9925,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00374,disk_full,False,True,resolved,disk_full,True,0.9953,clear_disk_logs,['clear_disk_logs'],False,True,True,False,False,[],,93.0,True,True
+SIM-00402,memory_leak,True,True,awaiting_human,memory_leak,True,0.6045,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00404,memory_leak,True,True,awaiting_human,memory_leak,True,0.6388,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00416,memory_leak,True,True,awaiting_human,disk_full,False,0.5227,clear_disk_logs,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00426,memory_leak,True,True,awaiting_human,db_pool_exhausted,False,0.5297,reset_db_pool,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00428,memory_leak,True,True,awaiting_human,disk_full,False,0.6691,clear_disk_logs,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00430,memory_leak,False,True,resolved,memory_leak,True,0.9952,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00434,memory_leak,False,True,resolved,memory_leak,True,0.9949,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00448,memory_leak,False,True,resolved,memory_leak,True,0.9957,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00450,memory_leak,False,True,resolved,memory_leak,True,0.9955,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00458,memory_leak,False,True,resolved,memory_leak,True,0.9942,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00465,memory_leak,False,True,resolved,memory_leak,True,0.9941,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00468,memory_leak,False,True,resolved,memory_leak,True,0.9954,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00474,memory_leak,False,True,resolved,memory_leak,True,0.9955,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00476,memory_leak,False,True,resolved,memory_leak,True,0.9946,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00490,memory_leak,False,True,resolved,memory_leak,True,0.9948,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00500,memory_leak,False,True,resolved,memory_leak,True,0.9954,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00509,memory_leak,False,True,resolved,memory_leak,True,0.9957,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00512,memory_leak,False,True,resolved,memory_leak,True,0.9947,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00520,memory_leak,False,True,resolved,memory_leak,True,0.9954,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00521,memory_leak,False,True,resolved,memory_leak,True,0.9956,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00534,memory_leak,False,True,resolved,memory_leak,True,0.9935,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00537,memory_leak,False,True,resolved,memory_leak,True,0.9953,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00542,memory_leak,False,True,resolved,memory_leak,True,0.9956,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00547,memory_leak,False,True,resolved,memory_leak,True,0.9942,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00555,memory_leak,False,True,resolved,memory_leak,True,0.9943,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00561,memory_leak,False,True,resolved,memory_leak,True,0.9936,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00566,memory_leak,False,True,resolved,memory_leak,True,0.995,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00567,memory_leak,False,True,resolved,memory_leak,True,0.9957,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00571,memory_leak,False,True,resolved,memory_leak,True,0.9952,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00574,memory_leak,False,True,resolved,memory_leak,True,0.9954,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00596,memory_leak,False,True,resolved,memory_leak,True,0.9947,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00608,service_crash,True,True,awaiting_human,disk_full,False,0.5116,clear_disk_logs,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00609,service_crash,True,True,awaiting_human,service_crash,True,0.6384,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00610,service_crash,True,True,awaiting_human,service_crash,True,0.5085,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00620,service_crash,True,True,awaiting_human,service_crash,True,0.6124,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00629,service_crash,True,True,awaiting_human,service_crash,True,0.6682,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00630,service_crash,False,True,resolved,service_crash,True,0.995,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00640,service_crash,False,True,resolved,service_crash,True,0.9952,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00643,service_crash,False,True,resolved,service_crash,True,0.9955,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00646,service_crash,False,True,resolved,service_crash,True,0.9925,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00664,service_crash,False,True,resolved,service_crash,True,0.9947,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00668,service_crash,False,True,resolved,service_crash,True,0.9955,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00692,service_crash,False,True,resolved,service_crash,True,0.9952,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00705,service_crash,False,True,resolved,service_crash,True,0.9953,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00707,service_crash,False,True,resolved,service_crash,True,0.9954,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00712,service_crash,False,True,resolved,service_crash,True,0.9948,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00718,service_crash,False,True,resolved,service_crash,True,0.9942,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00722,service_crash,False,True,resolved,service_crash,True,0.9947,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00723,service_crash,False,True,resolved,service_crash,True,0.9955,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00730,service_crash,False,True,resolved,service_crash,True,0.9948,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00733,service_crash,False,True,resolved,service_crash,True,0.9943,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00734,service_crash,False,True,resolved,service_crash,True,0.9915,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00738,service_crash,False,True,resolved,service_crash,True,0.9944,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00746,service_crash,False,True,resolved,service_crash,True,0.9926,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00749,service_crash,False,True,resolved,service_crash,True,0.9938,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00758,service_crash,False,True,resolved,service_crash,True,0.9945,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00766,service_crash,False,True,resolved,service_crash,True,0.9957,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00767,service_crash,False,True,resolved,service_crash,True,0.9937,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00770,service_crash,False,True,resolved,service_crash,True,0.9939,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00774,service_crash,False,True,resolved,service_crash,True,0.9957,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00782,service_crash,False,True,resolved,service_crash,True,0.9942,restart_service,['restart_service'],False,True,True,False,False,[],,138.0,True,True
+SIM-00800,network_partition,True,False,awaiting_human,cert_expired,False,0.9312,,[],False,False,False,True,True,"['insufficient_evidence', 'no_matching_runbook']",diagnosis,18.0,True,True
+SIM-00803,network_partition,True,False,awaiting_human,cert_expired,False,0.8962,,[],False,False,False,True,True,"['insufficient_evidence', 'low_confidence', 'no_matching_runbook']",diagnosis,18.0,True,True
+SIM-00818,network_partition,True,False,awaiting_human,service_crash,False,0.6224,restart_service,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00825,network_partition,True,False,awaiting_human,db_pool_exhausted,False,0.4709,reset_db_pool,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'triage_ambiguous']",triage,18.0,True,True
+SIM-00830,network_partition,False,False,awaiting_human,network_partition,True,0.9953,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00834,network_partition,False,False,awaiting_human,network_partition,True,0.994,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00837,network_partition,False,False,awaiting_human,network_partition,True,0.9943,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00841,network_partition,False,False,awaiting_human,network_partition,True,0.9952,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00846,network_partition,False,False,awaiting_human,network_partition,True,0.9955,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00850,network_partition,False,False,awaiting_human,network_partition,True,0.9955,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00859,network_partition,False,False,awaiting_human,network_partition,True,0.9949,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00872,network_partition,False,False,awaiting_human,network_partition,True,0.9924,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00875,network_partition,False,False,awaiting_human,network_partition,True,0.9952,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00881,network_partition,False,False,awaiting_human,network_partition,True,0.9955,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00898,network_partition,False,False,awaiting_human,network_partition,True,0.9953,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00899,network_partition,False,False,awaiting_human,network_partition,True,0.9955,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00922,network_partition,False,False,awaiting_human,network_partition,True,0.9954,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00934,network_partition,False,False,awaiting_human,network_partition,True,0.9917,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00935,network_partition,False,False,awaiting_human,network_partition,True,0.9936,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00944,network_partition,False,False,awaiting_human,network_partition,True,0.9948,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00951,network_partition,False,False,awaiting_human,network_partition,True,0.9951,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00962,network_partition,False,False,awaiting_human,network_partition,True,0.9945,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00967,network_partition,False,False,awaiting_human,network_partition,True,0.9956,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00969,network_partition,False,False,awaiting_human,network_partition,True,0.9942,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00973,network_partition,False,False,awaiting_human,network_partition,True,0.9937,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00974,network_partition,False,False,awaiting_human,network_partition,True,0.9946,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00983,network_partition,False,False,awaiting_human,network_partition,True,0.9953,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00994,network_partition,False,False,awaiting_human,network_partition,True,0.995,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-00995,network_partition,False,False,awaiting_human,network_partition,True,0.9953,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01006,cert_expired,True,False,awaiting_human,cert_expired,True,0.9155,,[],False,False,False,True,True,"['insufficient_evidence', 'no_matching_runbook']",diagnosis,18.0,True,True
+SIM-01010,cert_expired,True,False,awaiting_human,cert_expired,True,0.7916,,[],False,False,False,True,True,"['insufficient_evidence', 'low_confidence', 'no_matching_runbook']",diagnosis,18.0,True,True
+SIM-01022,cert_expired,True,False,awaiting_human,cert_expired,True,0.8019,,[],False,False,False,True,True,"['insufficient_evidence', 'low_confidence', 'no_matching_runbook']",diagnosis,18.0,True,True
+SIM-01027,cert_expired,True,False,awaiting_human,cert_expired,True,0.7378,,[],False,False,False,True,True,"['conflicting_evidence', 'insufficient_evidence', 'low_confidence', 'no_matching_runbook']",diagnosis,18.0,True,True
+SIM-01028,cert_expired,True,False,awaiting_human,cert_expired,True,0.8633,,[],False,False,False,True,True,"['insufficient_evidence', 'low_confidence', 'no_matching_runbook']",diagnosis,18.0,True,True
+SIM-01031,cert_expired,False,False,awaiting_human,cert_expired,True,0.9874,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01038,cert_expired,False,False,awaiting_human,cert_expired,True,0.9898,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01050,cert_expired,False,False,awaiting_human,cert_expired,True,0.9957,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01051,cert_expired,False,False,awaiting_human,cert_expired,True,0.9954,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01078,cert_expired,False,False,awaiting_human,cert_expired,True,0.9957,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01084,cert_expired,False,False,awaiting_human,cert_expired,True,0.9956,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01088,cert_expired,False,False,awaiting_human,cert_expired,True,0.9954,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01113,cert_expired,False,False,awaiting_human,cert_expired,True,0.9889,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01121,cert_expired,False,False,awaiting_human,cert_expired,True,0.9906,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01122,cert_expired,False,False,awaiting_human,cert_expired,True,0.9911,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01129,cert_expired,False,False,awaiting_human,cert_expired,True,0.9911,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01132,cert_expired,False,False,awaiting_human,cert_expired,True,0.9952,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01140,cert_expired,False,False,awaiting_human,cert_expired,True,0.9957,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01143,cert_expired,False,False,awaiting_human,cert_expired,True,0.9903,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01151,cert_expired,False,False,awaiting_human,cert_expired,True,0.9954,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01161,cert_expired,False,False,awaiting_human,cert_expired,True,0.9953,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01164,cert_expired,False,False,awaiting_human,cert_expired,True,0.9955,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01178,cert_expired,False,False,awaiting_human,cert_expired,True,0.9954,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01181,cert_expired,False,False,awaiting_human,cert_expired,True,0.9882,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01183,cert_expired,False,False,awaiting_human,cert_expired,True,0.9887,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01185,cert_expired,False,False,awaiting_human,cert_expired,True,0.9956,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01190,cert_expired,False,False,awaiting_human,cert_expired,True,0.995,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01194,cert_expired,False,False,awaiting_human,cert_expired,True,0.9908,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01197,cert_expired,False,False,awaiting_human,cert_expired,True,0.9956,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True
+SIM-01199,cert_expired,False,False,awaiting_human,cert_expired,True,0.9954,,[],False,False,False,True,True,['no_matching_runbook'],resolution,18.0,True,True

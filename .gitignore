@@ -1,0 +1,17 @@
+# secrets and environments
+.env
+.venv/
+venv/
+
+# datasets (raw + processed) - re-create with scripts/download_data.py, generate_incidents.py, data_loader.py
+data/
+
+# trained/built artifacts - re-create with train_triage.py, rag.store, eval.calibrate
+artifacts/
+
+# python / tooling
+__pycache__/
+*.pyc
+.pytest_cache/
+.streamlit/secrets.toml
+.claude/

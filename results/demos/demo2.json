@@ -1,0 +1,816 @@
+{
+  "incident": {
+    "id": "DEMO-2",
+    "source": "alert",
+    "text": "Checkout cannot reach payments service",
+    "logs": [
+      "2026-01-01 12:00:01 INFO checkout.api: GET /cart/90382 200 1ms",
+      "2026-01-01 12:00:04 ERROR checkout.client: dial tcp 10.0.9.4:443: i/o timeout",
+      "2026-01-01 12:00:21 INFO scheduler: job cleanup_sessions finished in 7s",
+      "2026-01-01 12:00:34 WARN raft: lost quorum, peers unreachable: [node-2, node-3]",
+      "2026-01-01 12:00:53 INFO auth: token refreshed for client web-frontend",
+      "2026-01-01 12:01:04 ERROR lb: upstream checkout-api returned 502 Bad Gateway",
+      "2026-01-01 12:01:08 INFO checkout.api: POST /orders 201 8179ms",
+      "2026-01-01 12:01:18 INFO scheduler: job cleanup_sessions finished in 3s"
+    ],
+    "timestamp": "2026-10-30T00:29:58",
+    "category": null,
+    "priority": null,
+    "status": "open"
+  },
+  "trace": [
+    {
+      "agent": "ingestion",
+      "action": "normalize incident",
+      "evidence": [
+        "DEMO-2"
+      ],
+      "confidence": null,
+      "outcome": "ok",
+      "detail": {
+        "source": "alert",
+        "n_log_lines": 8
+      },
+      "ts": "2026-10-30T00:29:58"
+    },
+    {
+      "agent": "triage",
+      "action": "predict fault=network_partition queue=Service Outages and Maintenance priority=high",
+      "evidence": [
+        "node",
+        "10",
+        "unreachable",
+        "443 timeout",
+        "client dial"
+      ],
+      "confidence": 0.944999099422701,
+      "outcome": "ok",
+      "detail": {
+        "margin": 0.9151462293594177,
+        "runner_up": "service_crash",
+        "reason": null
+      },
+      "ts": "2026-10-30T00:29:58"
+    },
+    {
+      "agent": "diagnosis",
+      "action": "rank hypotheses; top=network_partition",
+      "evidence": [
+        "DEMO-2:log:1",
+        "DEMO-2:log:3",
+        "INC:SIM-00980",
+        "INC:SIM-00950",
+        "INC:SIM-00931",
+        "LOG:sim:SIM-00985",
+        "LOG:sim:SIM-00912"
+      ],
+      "confidence": 0.978,
+      "outcome": "ok",
+      "detail": {
+        "hypotheses": [
+          [
+            "network_partition",
+            0.978
+          ],
+          [
+            "service_crash",
+            0.0119
+          ],
+          [
+            "db_pool_exhausted",
+            0.0027
+          ],
+          [
+            "disk_full",
+            0.0027
+          ]
+        ],
+        "reason": null
+      },
+      "ts": "2026-10-30T00:29:59"
+    },
+    {
+      "agent": "resolution",
+      "action": "select runbook -> no_matching_runbook",
+      "evidence": [],
+      "confidence": null,
+      "outcome": "failed",
+      "detail": {
+        "runbook": null,
+        "risk": null,
+        "rejected": [],
+        "reason": "no whitelisted runbook handles 'network_partition'"
+      },
+      "ts": "2026-10-30T00:29:59"
+    },
+    {
+      "agent": "guardrail",
+      "action": "decision=escalate",
+      "evidence": [
+        "margin",
+        "top_sim",
+        "gap",
+        "top_score",
+        "direct_evidence"
+      ],
+      "confidence": 0.9946,
+      "outcome": "low_confidence",
+      "detail": {
+        "reasons": [
+          "no_matching_runbook"
+        ],
+        "reason": "no_matching_runbook"
+      },
+      "ts": "2026-10-30T00:29:59"
+    },
+    {
+      "agent": "escalation",
+      "action": "build handoff report",
+      "evidence": [
+        "INC:SIM-00980",
+        "INC:SIM-00950",
+        "INC:SIM-00931",
+        "INC:SIM-00957",
+        "INC:SIM-00918"
+      ],
+      "confidence": null,
+      "outcome": "ok",
+      "detail": {
+        "stuck_at": {
+          "agent": "resolution",
+          "action": "select runbook -> no_matching_runbook",
+          "outcome": "failed",
+          "reason": "no whitelisted runbook handles 'network_partition'"
+        },
+        "reasons": [
+          "no_matching_runbook"
+        ]
+      },
+      "ts": "2026-10-30T00:29:59"
+    }
+  ],
+  "elapsed_s": 18.0,
+  "triage": {
+    "queue": {
+      "label": "Service Outages and Maintenance",
+      "confidence": 0.9328875495089626,
+      "runner_up": "IT Support",
+      "margin": 0.8927235112865237,
+      "evidence_words": [
+        "service",
+        "reach"
+      ],
+      "probs": {
+        "IT Support": 0.04016403822243883,
+        "Service Outages and Maintenance": 0.9328875495089626,
+        "Technical Support": 0.02694841226859859
+      }
+    },
+    "priority": {
+      "label": "high",
+      "confidence": 0.4887810217718353,
+      "runner_up": "medium",
+      "margin": 0.0919767023324049,
+      "evidence_words": [
+        "service",
+        "payments",
+        "reach"
+      ],
+      "probs": {
+        "high": 0.4887810217718353,
+        "low": 0.11441465878873425,
+        "medium": 0.3968043194394304
+      }
+    },
+    "fault": {
+      "label": "network_partition",
+      "confidence": 0.944999099422701,
+      "runner_up": "service_crash",
+      "margin": 0.9151462293594177,
+      "evidence_words": [
+        "node",
+        "10",
+        "unreachable",
+        "443 timeout",
+        "client dial"
+      ],
+      "probs": {
+        "cert_expired": 0.005480845162969078,
+        "db_pool_exhausted": 0.006713849825391282,
+        "disk_full": 0.006746077629723978,
+        "memory_leak": 0.006207257895931125,
+        "network_partition": 0.944999099422701,
+        "service_crash": 0.029852870063283354
+      }
+    }
+  },
+  "diagnosis": {
+    "hypotheses": [
+      {
+        "cause": "network_partition",
+        "score": 0.978,
+        "components": {
+          "triage": 0.945,
+          "retrieval": 1.0,
+          "rules": 1.0
+        },
+        "supporting_evidence": [
+          "DEMO-2:log:1",
+          "DEMO-2:log:3",
+          "INC:SIM-00980",
+          "INC:SIM-00950",
+          "INC:SIM-00931",
+          "LOG:sim:SIM-00985",
+          "LOG:sim:SIM-00912"
+        ],
+        "missing_or_contradicting": [],
+        "explanation": "network_partition (score 0.98): triage p=0.94, neighbour vote=1.00, rule match=1.00. Evidence: [DEMO-2:log:1], [DEMO-2:log:3], [INC:SIM-00980], [INC:SIM-00950], [INC:SIM-00931], [LOG:sim:SIM-00985], [LOG:sim:SIM-00912]."
+      },
+      {
+        "cause": "service_crash",
+        "score": 0.0119,
+        "components": {
+          "triage": 0.0299,
+          "retrieval": 0.0,
+          "rules": 0.0
+        },
+        "supporting_evidence": [],
+        "missing_or_contradicting": [
+          "no log line matches a service_crash signature",
+          "no similar resolved incident had this cause"
+        ],
+        "explanation": "service_crash (score 0.01): triage p=0.03, neighbour vote=0.00, rule match=0.00. Gaps: no log line matches a service_crash signature; no similar resolved incident had this cause."
+      },
+      {
+        "cause": "db_pool_exhausted",
+        "score": 0.0027,
+        "components": {
+          "triage": 0.0067,
+          "retrieval": 0.0,
+          "rules": 0.0
+        },
+        "supporting_evidence": [],
+        "missing_or_contradicting": [
+          "no log line matches a db_pool_exhausted signature",
+          "no similar resolved incident had this cause"
+        ],
+        "explanation": "db_pool_exhausted (score 0.00): triage p=0.01, neighbour vote=0.00, rule match=0.00. Gaps: no log line matches a db_pool_exhausted signature; no similar resolved incident had this cause."
+      },
+      {
+        "cause": "disk_full",
+        "score": 0.0027,
+        "components": {
+          "triage": 0.0067,
+          "retrieval": 0.0,
+          "rules": 0.0
+        },
+        "supporting_evidence": [],
+        "missing_or_contradicting": [
+          "no log line matches a disk_full signature",
+          "no similar resolved incident had this cause"
+        ],
+        "explanation": "disk_full (score 0.00): triage p=0.01, neighbour vote=0.00, rule match=0.00. Gaps: no log line matches a disk_full signature; no similar resolved incident had this cause."
+      }
+    ],
+    "top_cause": "network_partition",
+    "top_score": 0.978,
+    "score_gap": 0.9661,
+    "top_retrieval_similarity": 0.9621,
+    "top_direct_evidence": 2,
+    "retrieved": {
+      "incidents": [
+        {
+          "id": "INC:SIM-00980",
+          "score": 0.031498,
+          "similarity": 0.962,
+          "bm25": 244.497,
+          "bm25_rank": 4,
+          "vector_rank": 3,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "network_partition",
+            "root_cause": "network_partition",
+            "fix": "escalated (no runbook)",
+            "supported": false,
+            "split": "train"
+          },
+          "snippet": "Cluster quorum lost, peers unreachable from checkout INFO checkout.api: POST /orders 201 22083ms INFO scheduler: job cleanup_sessions finished in 1s INFO checkout.api: POST /orders 201 3797ms ERROR net: no route to host 10.0.6.5 (payments-s"
+        },
+        {
+          "id": "INC:SIM-00950",
+          "score": 0.030622,
+          "similarity": 0.9621,
+          "bm25": 237.599,
+          "bm25_rank": 9,
+          "vector_rank": 2,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "network_partition",
+            "root_cause": "network_partition",
+            "fix": "escalated (no runbook)",
+            "supported": false,
+            "split": "train"
+          },
+          "snippet": "Payments calls timing out, hosts unreachable ERROR net: no route to host 10.0.7.6 (payments-svc) INFO scheduler: job cleanup_sessions finished in 4s ERROR checkout.client: dial tcp 10.0.2.29:443: i/o timeout INFO checkout.api: GET /cart/364"
+        },
+        {
+          "id": "INC:SIM-00931",
+          "score": 0.030366,
+          "similarity": 0.9399,
+          "bm25": 255.133,
+          "bm25_rank": 3,
+          "vector_rank": 9,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "network_partition",
+            "root_cause": "network_partition",
+            "fix": "escalated (no runbook)",
+            "supported": false,
+            "split": "train"
+          },
+          "snippet": "Payments calls timing out, hosts unreachable INFO scheduler: job cleanup_sessions finished in 9s ERROR checkout.client: dial tcp 10.0.4.3:443: i/o timeout INFO auth: token refreshed for client web-frontend INFO auth: token refreshed for cli"
+        },
+        {
+          "id": "INC:SIM-00957",
+          "score": 0.03009,
+          "similarity": 0.9521,
+          "bm25": 239.608,
+          "bm25_rank": 8,
+          "vector_rank": 5,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "network_partition",
+            "root_cause": "network_partition",
+            "fix": "escalated (no runbook)",
+            "supported": false,
+            "split": "train"
+          },
+          "snippet": "Network errors between checkout and payments cluster INFO checkout.api: GET /cart/85197 200 9ms INFO scheduler: job cleanup_sessions finished in 4s INFO checkout.api: GET /cart/40234 200 7ms WARN raft: lost quorum, peers unreachable: [node-"
+        },
+        {
+          "id": "INC:SIM-00918",
+          "score": 0.029514,
+          "similarity": 0.9531,
+          "bm25": 236.462,
+          "bm25_rank": 12,
+          "vector_rank": 4,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "network_partition",
+            "root_cause": "network_partition",
+            "fix": "escalated (no runbook)",
+            "supported": false,
+            "split": "train"
+          },
+          "snippet": "Customer reports: checkout not working properly INFO checkout.api: GET /health 200 1ms DEBUG cache: hit ratio 0.97 INFO scheduler: job cleanup_sessions finished in 5s ERROR net: no route to host 10.0.9.31 (payments-svc) ERROR checkout.clien"
+        },
+        {
+          "id": "INC:SIM-00912",
+          "score": 0.028158,
+          "similarity": 0.9069,
+          "bm25": 260.393,
+          "bm25_rank": 1,
+          "vector_rank": 25,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "network_partition",
+            "root_cause": "network_partition",
+            "fix": "escalated (no runbook)",
+            "supported": false,
+            "split": "train"
+          },
+          "snippet": "Checkout cannot reach payments service ERROR lb: upstream checkout-api returned 502 Bad Gateway INFO checkout.api: POST /orders 201 29446ms INFO scheduler: job cleanup_sessions finished in 5s ERROR checkout.client: dial tcp 10.0.8.18:443: i"
+        },
+        {
+          "id": "INC:SIM-00892",
+          "score": 0.027757,
+          "similarity": 0.9048,
+          "bm25": 259.909,
+          "bm25_rank": 2,
+          "vector_rank": 26,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "network_partition",
+            "root_cause": "network_partition",
+            "fix": "escalated (no runbook)",
+            "supported": false,
+            "split": "train"
+          },
+          "snippet": "Checkout cannot reach payments service INFO checkout.api: GET /health 200 2ms DEBUG metrics: exported 42 series to prometheus WARN raft: lost quorum, peers unreachable: [node-2, node-3] INFO auth: token refreshed for client web-frontend ERR"
+        },
+        {
+          "id": "INC:SIM-00866",
+          "score": 0.027444,
+          "similarity": 0.9399,
+          "bm25": 230.365,
+          "bm25_rank": 16,
+          "vector_rank": 10,
+          "meta": {
+            "kind": "sim_incident",
+            "fault": "network_partition",
+            "root_cause": "network_partition",
+            "fix": "escalated (no runbook)",
+            "supported": false,
+            "split": "train"
+          },
+          "snippet": "Connectivity alarm: checkout to payments-svc INFO checkout.api: GET /cart/65506 200 7ms ERROR checkout.client: dial tcp 10.0.2.34:443: i/o timeout WARN raft: lost quorum, peers unreachable: [node-2, node-3] INFO checkout.api: GET /health 20"
+        }
+      ],
+      "logs": [
+        {
+          "id": "LOG:sim:SIM-00985",
+          "score": 0.032522,
+          "similarity": 0.7446,
+          "bm25": 128.676,
+          "bm25_rank": 1,
+          "vector_rank": 2,
+          "meta": {
+            "kind": "sim_logs",
+            "service": "checkout-api",
+            "fault": "network_partition",
+            "split": "train"
+          },
+          "snippet": "WARN raft: lost quorum, peers unreachable: [node-2, node-3] ERROR net: no route to host 10.0.7.36 (payments-svc) DEBUG cache: hit ratio 0.96 DEBUG metrics: exported 42 series to prometheus DEBUG cache: hit ratio 0.94 INFO checkout.api: GET "
+        },
+        {
+          "id": "LOG:sim:SIM-00912",
+          "score": 0.032266,
+          "similarity": 0.7669,
+          "bm25": 119.552,
+          "bm25_rank": 3,
+          "vector_rank": 1,
+          "meta": {
+            "kind": "sim_logs",
+            "service": "checkout-api",
+            "fault": "network_partition",
+            "split": "train"
+          },
+          "snippet": "ERROR lb: upstream checkout-api returned 502 Bad Gateway INFO checkout.api: POST /orders 201 29446ms INFO scheduler: job cleanup_sessions finished in 5s ERROR checkout.client: dial tcp 10.0.8.18:443: i/o timeout WARN raft: lost quorum, peer"
+        },
+        {
+          "id": "LOG:sim:SIM-00892",
+          "score": 0.031754,
+          "similarity": 0.7379,
+          "bm25": 120.464,
+          "bm25_rank": 2,
+          "vector_rank": 4,
+          "meta": {
+            "kind": "sim_logs",
+            "service": "checkout-api",
+            "fault": "network_partition",
+            "split": "train"
+          },
+          "snippet": "INFO checkout.api: GET /health 200 2ms DEBUG metrics: exported 42 series to prometheus WARN raft: lost quorum, peers unreachable: [node-2, node-3] INFO auth: token refreshed for client web-frontend ERROR lb: upstream checkout-api returned 5"
+        },
+        {
+          "id": "LOG:sim:SIM-00949",
+          "score": 0.031025,
+          "similarity": 0.7383,
+          "bm25": 115.693,
+          "bm25_rank": 6,
+          "vector_rank": 3,
+          "meta": {
+            "kind": "sim_logs",
+            "service": "checkout-api",
+            "fault": "network_partition",
+            "split": "train"
+          },
+          "snippet": "INFO checkout.api: POST /orders 201 27965ms WARN raft: lost quorum, peers unreachable: [node-2, node-3] INFO checkout.api: GET /health 200 4ms ERROR net: no route to host 10.0.5.28 (payments-svc) ERROR checkout.client: dial tcp 10.0.6.34:44"
+        }
+      ],
+      "runbooks": [
+        {
+          "id": "RB:restart_service",
+          "score": 0.032787,
+          "similarity": 0.855,
+          "bm25": 8.223,
+          "bm25_rank": 1,
+          "vector_rank": 1,
+          "meta": {
+            "kind": "runbook",
+            "id": "RB:restart_service",
+            "name": "restart_service",
+            "description": "Graceful restart of the checkout-api process.",
+            "handles": [
+              "memory_leak",
+              "service_crash"
+            ],
+            "risk": "low",
+            "expected_effect": "process up, heap back to baseline",
+            "expected_checks": [
+              "process_up",
+              "heap_ok",
+              "error_rate_ok"
+            ]
+          },
+          "snippet": "restart service. Graceful restart of the checkout-api process. Handles: memory leak, service crash. Effect: process up, heap back to baseline"
+        },
+        {
+          "id": "RB:drain_and_restart_node",
+          "score": 0.032258,
+          "similarity": 0.6794,
+          "bm25": 6.537,
+          "bm25_rank": 2,
+          "vector_rank": 2,
+          "meta": {
+            "kind": "runbook",
+            "id": "RB:drain_and_restart_node",
+            "name": "drain_and_restart_node",
+            "description": "Drain traffic from the node, restart, re-add.",
+            "handles": [
+              "service_crash",
+              "memory_leak"
+            ],
+            "risk": "medium",
+            "expected_effect": "process up and serving",
+            "expected_checks": [
+              "process_up",
+              "heap_ok",
+              "error_rate_ok"
+            ]
+          },
+          "snippet": "drain and restart node. Drain traffic from the node, restart, re-add. Handles: service crash, memory leak. Effect: process up and serving"
+        },
+        {
+          "id": "RB:enable_rate_limiting",
+          "score": 0.031746,
+          "similarity": 0.2415,
+          "bm25": 2.958,
+          "bm25_rank": 3,
+          "vector_rank": 3,
+          "meta": {
+            "kind": "runbook",
+            "id": "RB:enable_rate_limiting",
+            "name": "enable_rate_limiting",
+            "description": "Enable a 200 rps rate limit on checkout (mitigation).",
+            "handles": [
+              "high_load",
+              "db_pool_exhausted"
+            ],
+            "risk": "medium",
+            "expected_effect": "load reduced",
+            "expected_checks": [
+              "error_rate_ok"
+            ]
+          },
+          "snippet": "enable rate limiting. Enable a 200 rps rate limit on checkout (mitigation). Handles: high load, db pool exhausted. Effect: load reduced"
+        }
+      ]
+    },
+    "rule_hits": {
+      "network_partition": [
+        "DEMO-2:log:1",
+        "DEMO-2:log:3"
+      ]
+    },
+    "llm_used": false
+  },
+  "resolution": {
+    "runbook": null,
+    "status": "no_matching_runbook",
+    "risk": null,
+    "matched_because": "no whitelisted runbook handles 'network_partition'",
+    "rejected": [],
+    "evidence": []
+  },
+  "guardrail": {
+    "decision": "escalate",
+    "reasons": [
+      "no_matching_runbook"
+    ],
+    "confidence": 0.9946,
+    "signals": {
+      "margin": 0.9151,
+      "top_sim": 0.9621,
+      "gap": 0.9661,
+      "top_score": 0.978,
+      "direct_evidence": 2.0
+    },
+    "thresholds": {
+      "margin": 0.3,
+      "top_sim": 0.5,
+      "gap": 0.2,
+      "confidence": 0.9
+    },
+    "calibrated": true
+  },
+  "escalation_reasons": [
+    "no_matching_runbook"
+  ],
+  "handoff": {
+    "incident_id": "DEMO-2",
+    "summary": "Checkout cannot reach payments service | predicted fault: network_partition | queue: Service Outages and Maintenance | priority: high",
+    "stuck_at": {
+      "agent": "resolution",
+      "action": "select runbook -> no_matching_runbook",
+      "outcome": "failed",
+      "reason": "no whitelisted runbook handles 'network_partition'"
+    },
+    "per_agent_confidence": {
+      "triage_fault_confidence": 0.944999099422701,
+      "triage_fault_margin": 0.9151462293594177,
+      "diagnosis_top_score": 0.978,
+      "diagnosis_score_gap": 0.9661,
+      "retrieval_top_similarity": 0.9621,
+      "guardrail_calibrated_confidence": 0.9946
+    },
+    "why_escalated": {
+      "reasons": [
+        "no_matching_runbook"
+      ],
+      "text": "no whitelisted runbook addresses the most likely cause"
+    },
+    "hypotheses": [
+      {
+        "cause": "network_partition",
+        "score": 0.978,
+        "evidence": [
+          "DEMO-2:log:1",
+          "DEMO-2:log:3",
+          "INC:SIM-00980",
+          "INC:SIM-00950",
+          "INC:SIM-00931",
+          "LOG:sim:SIM-00985",
+          "LOG:sim:SIM-00912"
+        ],
+        "missing_or_contradicting": []
+      },
+      {
+        "cause": "service_crash",
+        "score": 0.0119,
+        "evidence": [],
+        "missing_or_contradicting": [
+          "no log line matches a service_crash signature",
+          "no similar resolved incident had this cause"
+        ]
+      },
+      {
+        "cause": "db_pool_exhausted",
+        "score": 0.0027,
+        "evidence": [],
+        "missing_or_contradicting": [
+          "no log line matches a db_pool_exhausted signature",
+          "no similar resolved incident had this cause"
+        ]
+      },
+      {
+        "cause": "disk_full",
+        "score": 0.0027,
+        "evidence": [],
+        "missing_or_contradicting": [
+          "no log line matches a disk_full signature",
+          "no similar resolved incident had this cause"
+        ]
+      }
+    ],
+    "actions_taken": [],
+    "evidence": [
+      {
+        "id": "INC:SIM-00980",
+        "type": "incidents",
+        "similarity": 0.962,
+        "label": "network_partition",
+        "snippet": "Cluster quorum lost, peers unreachable from checkout INFO checkout.api: POST /orders 201 22083ms INFO scheduler: job cleanup_sessions finished in 1s INFO checko"
+      },
+      {
+        "id": "INC:SIM-00950",
+        "type": "incidents",
+        "similarity": 0.9621,
+        "label": "network_partition",
+        "snippet": "Payments calls timing out, hosts unreachable ERROR net: no route to host 10.0.7.6 (payments-svc) INFO scheduler: job cleanup_sessions finished in 4s ERROR check"
+      },
+      {
+        "id": "INC:SIM-00931",
+        "type": "incidents",
+        "similarity": 0.9399,
+        "label": "network_partition",
+        "snippet": "Payments calls timing out, hosts unreachable INFO scheduler: job cleanup_sessions finished in 9s ERROR checkout.client: dial tcp 10.0.4.3:443: i/o timeout INFO "
+      },
+      {
+        "id": "INC:SIM-00957",
+        "type": "incidents",
+        "similarity": 0.9521,
+        "label": "network_partition",
+        "snippet": "Network errors between checkout and payments cluster INFO checkout.api: GET /cart/85197 200 9ms INFO scheduler: job cleanup_sessions finished in 4s INFO checkou"
+      },
+      {
+        "id": "INC:SIM-00918",
+        "type": "incidents",
+        "similarity": 0.9531,
+        "label": "network_partition",
+        "snippet": "Customer reports: checkout not working properly INFO checkout.api: GET /health 200 1ms DEBUG cache: hit ratio 0.97 INFO scheduler: job cleanup_sessions finished"
+      },
+      {
+        "id": "INC:SIM-00912",
+        "type": "incidents",
+        "similarity": 0.9069,
+        "label": "network_partition",
+        "snippet": "Checkout cannot reach payments service ERROR lb: upstream checkout-api returned 502 Bad Gateway INFO checkout.api: POST /orders 201 29446ms INFO scheduler: job "
+      },
+      {
+        "id": "INC:SIM-00892",
+        "type": "incidents",
+        "similarity": 0.9048,
+        "label": "network_partition",
+        "snippet": "Checkout cannot reach payments service INFO checkout.api: GET /health 200 2ms DEBUG metrics: exported 42 series to prometheus WARN raft: lost quorum, peers unre"
+      },
+      {
+        "id": "INC:SIM-00866",
+        "type": "incidents",
+        "similarity": 0.9399,
+        "label": "network_partition",
+        "snippet": "Connectivity alarm: checkout to payments-svc INFO checkout.api: GET /cart/65506 200 7ms ERROR checkout.client: dial tcp 10.0.2.34:443: i/o timeout WARN raft: lo"
+      },
+      {
+        "id": "LOG:sim:SIM-00985",
+        "type": "logs",
+        "similarity": 0.7446,
+        "label": "network_partition",
+        "snippet": "WARN raft: lost quorum, peers unreachable: [node-2, node-3] ERROR net: no route to host 10.0.7.36 (payments-svc) DEBUG cache: hit ratio 0.96 DEBUG metrics: expo"
+      },
+      {
+        "id": "LOG:sim:SIM-00912",
+        "type": "logs",
+        "similarity": 0.7669,
+        "label": "network_partition",
+        "snippet": "ERROR lb: upstream checkout-api returned 502 Bad Gateway INFO checkout.api: POST /orders 201 29446ms INFO scheduler: job cleanup_sessions finished in 5s ERROR c"
+      },
+      {
+        "id": "LOG:sim:SIM-00892",
+        "type": "logs",
+        "similarity": 0.7379,
+        "label": "network_partition",
+        "snippet": "INFO checkout.api: GET /health 200 2ms DEBUG metrics: exported 42 series to prometheus WARN raft: lost quorum, peers unreachable: [node-2, node-3] INFO auth: to"
+      },
+      {
+        "id": "LOG:sim:SIM-00949",
+        "type": "logs",
+        "similarity": 0.7383,
+        "label": "network_partition",
+        "snippet": "INFO checkout.api: POST /orders 201 27965ms WARN raft: lost quorum, peers unreachable: [node-2, node-3] INFO checkout.api: GET /health 200 4ms ERROR net: no rou"
+      },
+      {
+        "id": "RB:restart_service",
+        "type": "runbooks",
+        "similarity": 0.855,
+        "label": null,
+        "snippet": "restart service. Graceful restart of the checkout-api process. Handles: memory leak, service crash. Effect: process up, heap back to baseline"
+      },
+      {
+        "id": "RB:drain_and_restart_node",
+        "type": "runbooks",
+        "similarity": 0.6794,
+        "label": null,
+        "snippet": "drain and restart node. Drain traffic from the node, restart, re-add. Handles: service crash, memory leak. Effect: process up and serving"
+      },
+      {
+        "id": "RB:enable_rate_limiting",
+        "type": "runbooks",
+        "similarity": 0.2415,
+        "label": null,
+        "snippet": "enable rate limiting. Enable a 200 rps rate limit on checkout (mitigation). Handles: high load, db pool exhausted. Effect: load reduced"
+      }
+    ],
+    "incident_log_lines": [
+      {
+        "id": "DEMO-2:log:0",
+        "line": "2026-01-01 12:00:01 INFO checkout.api: GET /cart/90382 200 1ms"
+      },
+      {
+        "id": "DEMO-2:log:1",
+        "line": "2026-01-01 12:00:04 ERROR checkout.client: dial tcp 10.0.9.4:443: i/o timeout"
+      },
+      {
+        "id": "DEMO-2:log:2",
+        "line": "2026-01-01 12:00:21 INFO scheduler: job cleanup_sessions finished in 7s"
+      },
+      {
+        "id": "DEMO-2:log:3",
+        "line": "2026-01-01 12:00:34 WARN raft: lost quorum, peers unreachable: [node-2, node-3]"
+      },
+      {
+        "id": "DEMO-2:log:4",
+        "line": "2026-01-01 12:00:53 INFO auth: token refreshed for client web-frontend"
+      },
+      {
+        "id": "DEMO-2:log:5",
+        "line": "2026-01-01 12:01:04 ERROR lb: upstream checkout-api returned 502 Bad Gateway"
+      },
+      {
+        "id": "DEMO-2:log:6",
+        "line": "2026-01-01 12:01:08 INFO checkout.api: POST /orders 201 8179ms"
+      },
+      {
+        "id": "DEMO-2:log:7",
+        "line": "2026-01-01 12:01:18 INFO scheduler: job cleanup_sessions finished in 3s"
+      }
+    ],
+    "start_here": [
+      "(network_partition) Verify connectivity from checkout to payments-svc (ping / traceroute) [DEMO-2:log:1] [DEMO-2:log:3]",
+      "(network_partition) Check recent network, firewall or cluster-membership changes [DEMO-2:log:1] [DEMO-2:log:3]",
+      "(network_partition) No automated runbook exists for this cause: involve the network team [DEMO-2:log:1] [DEMO-2:log:3]"
+    ],
+    "worded_by": "template"
+  },
+  "status": "awaiting_human"
+}

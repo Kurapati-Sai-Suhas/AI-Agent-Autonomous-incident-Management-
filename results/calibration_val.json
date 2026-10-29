@@ -1,0 +1,104 @@
+{
+  "calibration": {
+    "val_n": 180,
+    "val_diag_accuracy": 0.9277777777777778,
+    "ece_calibrated": 0.0374,
+    "ece_raw_score": 0.0442,
+    "reliability_calibrated": [
+      {
+        "bin": "0.4-0.5",
+        "n": 1,
+        "mean_conf": 0.49759927149024114,
+        "accuracy": 0.0
+      },
+      {
+        "bin": "0.5-0.6",
+        "n": 6,
+        "mean_conf": 0.5534755546586688,
+        "accuracy": 0.6666666666666666
+      },
+      {
+        "bin": "0.6-0.7",
+        "n": 12,
+        "mean_conf": 0.6456029412766839,
+        "accuracy": 0.3333333333333333
+      },
+      {
+        "bin": "0.7-0.8",
+        "n": 5,
+        "mean_conf": 0.7561281402543868,
+        "accuracy": 0.6
+      },
+      {
+        "bin": "0.8-0.9",
+        "n": 2,
+        "mean_conf": 0.8833379213387602,
+        "accuracy": 1.0
+      },
+      {
+        "bin": "0.9-1.0",
+        "n": 154,
+        "mean_conf": 0.9947894623871864,
+        "accuracy": 1.0
+      }
+    ],
+    "reliability_raw": [
+      {
+        "bin": "0.2-0.3",
+        "n": 9,
+        "mean_conf": 0.2728222222222222,
+        "accuracy": 0.4444444444444444
+      },
+      {
+        "bin": "0.3-0.4",
+        "n": 14,
+        "mean_conf": 0.33345714285714284,
+        "accuracy": 0.5
+      },
+      {
+        "bin": "0.4-0.5",
+        "n": 3,
+        "mean_conf": 0.45326666666666665,
+        "accuracy": 0.6666666666666666
+      },
+      {
+        "bin": "0.7-0.8",
+        "n": 1,
+        "mean_conf": 0.7969,
+        "accuracy": 1.0
+      },
+      {
+        "bin": "0.8-0.9",
+        "n": 2,
+        "mean_conf": 0.82635,
+        "accuracy": 1.0
+      },
+      {
+        "bin": "0.9-1.0",
+        "n": 151,
+        "mean_conf": 0.9808582781456954,
+        "accuracy": 1.0
+      }
+    ],
+    "train_oof_diag_accuracy": 0.9369047619047619,
+    "calibrator_coef": {
+      "margin": 1.5964,
+      "top_sim": 0.1779,
+      "gap": 2.6262,
+      "top_score": 1.9697
+    },
+    "calibrator_intercept": -0.8736
+  },
+  "chosen_thresholds": {
+    "margin": 0.3,
+    "top_sim": 0.5,
+    "gap": 0.2,
+    "confidence": 0.9
+  },
+  "val_outcome_at_chosen": {
+    "auto_correct": 102,
+    "wrong_actions": 0,
+    "escalated": 78
+  },
+  "objective": "auto_correct - 10*wrong_actions; ties -> larger thresholds"
+}
