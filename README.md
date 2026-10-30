@@ -32,6 +32,7 @@ handoff report.
 Python 3.12 or 3.13 (developed and tested on 3.12.10; every dependency has 3.13 wheels).
 
 ```powershell
+git clone https://github.com/Kurapati-Sai-Suhas/AI-Agent-Autonomous-incident-Management-.git incedentagent
 cd incedentagent
 py -3.12 -m venv .venv            # or: py -3.13 -m venv .venv
 .\.venv\Scripts\Activate.ps1
